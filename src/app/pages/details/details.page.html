@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{ drink()?.strDrink || 'Details' }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="toggleLanguage()">{{ language().toUpperCase() }}</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  @if (loading()) {
+    <div class="state-container">
+      <ion-spinner></ion-spinner>
+    </div>
+  } @else if (error()) {
+    <div class="state-container">
+      <ion-text color="danger">{{ error() }}</ion-text>
+    </div>
+  } @else if (drink(); as drink) {
+    <!-- `as drink` aliases the unwrapped signal value so the block below doesn't need drink()! everywhere -->
+    <ion-img [src]="drink.strDrinkThumb" [alt]="drink.strDrink"></ion-img>
+
+    <ion-list>
+      <ion-item lines="none">
+        <ion-label>
+          <p>{{ drink.strCategory }} &middot; {{ drink.strAlcoholic }} &middot; {{ drink.strGlass }}</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+
+    <ion-list-header>Ingredients</ion-list-header>
+    <ion-list>
+      @for (ingredient of ingredients(); track ingredient.name) {
+        <ion-item>
+          <ion-label>{{ ingredient.name }}</ion-label>
+          @if (ingredient.measure) {
+            <ion-note slot="end">{{ ingredient.measure }}</ion-note>
+          }
+        </ion-item>
+      }
+    </ion-list>
+
+    <ion-list-header>Instructions</ion-list-header>
+    <!-- instructions() is the computed signal that resolves the ES/FR translation with an English fallback -->
+    <ion-item lines="none">
+      <ion-label class="ion-text-wrap">{{ instructions() }}</ion-label>
+    </ion-item>
+  }
+</ion-content>
