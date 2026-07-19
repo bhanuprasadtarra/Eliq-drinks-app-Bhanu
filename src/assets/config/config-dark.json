@@ -1,0 +1,15 @@
+{
+  "appName": "DrinksApp Dark",
+  "colors": {
+    "primary": "#1a1a1a",
+    "accent": "#00d4ff",
+    "bgColor": "#0d0d0d",
+    "textColor": "#ffffff",
+    "borderColor": "#333333",
+    "shadowColor": "rgba(0, 212, 255, 0.1)",
+    "fontFamily": "'Segoe UI', Tahoma, Geneva, sans-serif"
+  },
+  "features": {
+    "showLanguageToggle": true
+  }
+}

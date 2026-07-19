@@ -32,6 +32,86 @@
  * https://ionicframework.com/docs/theming/dark-mode
  */
 
-/* @import "@ionic/angular/css/palettes/dark.always.css"; */
-/* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import '@ionic/angular/css/palettes/dark.system.css';
+/* Not importing a dark palette here — theme is driven by config.json (see ThemeService),
+   not by the OS/browser color-scheme preference. Ionic's own --ion-* variables are
+   remapped onto our --bg-color/--text-color/etc. below so every Ionic component
+   (ion-content, ion-toolbar, ion-item, ...) follows the config theme too. */
+
+/**
+ * Theme variables
+ * -----------------------------------------------------
+ * Defaults here; ThemeService overwrites these at runtime via
+ * document.documentElement.style.setProperty() once config loads.
+ */
+:root {
+  --primary-color: #1a1a1a;
+  --accent-color: #00d4ff;
+  --bg-color: #0d0d0d;
+  --text-color: #ffffff;
+  --border-color: #333333;
+  --border-radius: 8px;
+  --shadow: 0 2px 8px rgba(0, 212, 255, 0.1);
+  --font-family: 'Segoe UI', sans-serif;
+  --transition: all 0.3s ease;
+
+  // Remap Ionic's own theming variables onto ours so built-in components
+  // (ion-content, ion-header/toolbar, ion-item/list, ...) follow the config
+  // theme instead of Ionic's default light/OS-driven palette.
+  --ion-background-color: var(--bg-color);
+  --ion-text-color: var(--text-color);
+  --ion-toolbar-background: var(--bg-color);
+  --ion-toolbar-color: var(--text-color);
+  --ion-item-background: var(--bg-color);
+  --ion-item-color: var(--text-color);
+  --ion-border-color: var(--border-color);
+  --ion-card-background: var(--bg-color);
+}
+
+body,
+ion-app {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: var(--font-family);
+}
+
+ion-card {
+  --background: var(--bg-color);
+  --color: var(--text-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  // NOTE: this references --shadow, but ThemeService.applyTheme() only ever sets
+  // --shadow-color — so this stays pinned to the :root default below and never
+  // actually updates per theme. Not fixed here since only comments were asked for.
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+}
+
+ion-button {
+  --background: var(--primary-color);
+  --color: var(--text-color);
+  --border-radius: var(--border-radius);
+}
+
+ion-img {
+  border-radius: var(--border-radius);
+}
+
+/* Utility classes */
+.fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 600px) {
+  :root {
+    --font-size-large: 18px;
+  }
+}

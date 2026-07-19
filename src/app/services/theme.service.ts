@@ -27,12 +27,13 @@ export class ThemeService {
     const root = document.documentElement;
     const colors = this.configService.colors();
 
+    // Keys here must match config-dark.json/config-light.json's `colors` shape exactly.
     root.style.setProperty('--primary-color', colors.primary || '#1a1a1a');
     root.style.setProperty('--accent-color', colors.accent || '#00d4ff');
-    root.style.setProperty('--bg-color', colors.background || '#ffffff');
-    root.style.setProperty('--text-color', colors.text || '#1a1a1a');
-    root.style.setProperty('--border-color', colors.border || '#e0e0e0');
-    root.style.setProperty('--shadow-color', colors.shadow || 'rgba(0, 0, 0, 0.1)');
+    root.style.setProperty('--bg-color', colors.bgColor || '#ffffff');
+    root.style.setProperty('--text-color', colors.textColor || '#1a1a1a');
+    root.style.setProperty('--border-color', colors.borderColor || '#e0e0e0');
+    root.style.setProperty('--shadow-color', colors.shadowColor || 'rgba(0, 0, 0, 0.1)');
     root.style.setProperty('--border-radius', colors.borderRadius || '8px');
     root.style.setProperty('--font-family', colors.fontFamily || 'system-ui, sans-serif');
   }

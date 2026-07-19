@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, computed, inject, signal } from '@angular/core';
-import { Observable, map, tap } from 'rxjs';
+import { Observable, map, switchMap, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -20,9 +20,20 @@ export class ConfigService {
    * Fetches the config JSON at `path` and updates configData, so appName/colors/features
    * refresh reactively. Returns Observable<void> so callers can subscribe to know when it's ready
    * without needing the raw payload.
+   *
+   * `path` may point to an indirection file like assets/config.json, which only carries a
+   * `configFile` pointer (e.g. "config/config-dark.json") to the actual theme file — in that
+   * case the pointed-to file is fetched and its contents become configData instead.
    */
   loadConfig(path: string): Observable<void> {
     return this.http.get<any>(path).pipe(
+      switchMap((data) => {
+        if (data?.configFile) {
+          const base = path.substring(0, path.lastIndexOf('/') + 1);
+          return this.http.get<any>(base + data.configFile);
+        }
+        return [data];
+      }),
       tap((data) => this.configData.set(data)),
       map(() => void 0),
     );
