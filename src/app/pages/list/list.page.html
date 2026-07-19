@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Eliq</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- One state visible at a time, driven by the loading/error/drinks signals in list.page.ts -->
+  @if (loading()) {
+    <div class="state-container">
+      <ion-spinner></ion-spinner>
+    </div>
+  } @else if (error()) {
+    <div class="state-container">
+      <ion-text color="danger">{{ error() }}</ion-text>
+    </div>
+  } @else {
+    <ion-list>
+      <!-- track by idDrink so Angular reuses DOM nodes instead of rebuilding the list on refresh -->
+      @for (drink of drinks(); track drink.idDrink) {
+        <ion-item button (click)="openDetail(drink)">
+          <ion-thumbnail slot="start">
+            <ion-img [src]="drink.strDrinkThumb" [alt]="drink.strDrink"></ion-img>
+          </ion-thumbnail>
+          <ion-label>{{ drink.strDrink }}</ion-label>
+        </ion-item>
+      }
+    </ion-list>
+  }
+</ion-content>
