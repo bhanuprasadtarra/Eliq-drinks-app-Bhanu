@@ -44,6 +44,8 @@ export class ListPage implements OnInit {
 
   // Passes the drink id as a query param rather than a route param, per the prompt spec.
   openDetail(drink: Drink): void {
+    // Blur the clicked item so it's not focused when Ionic marks this page aria-hidden.
+    (document.activeElement as HTMLElement | null)?.blur();
     this.router.navigate(['/details'], { queryParams: { id: drink.idDrink } });
   }
 }
