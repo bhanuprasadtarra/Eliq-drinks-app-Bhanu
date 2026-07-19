@@ -9,7 +9,9 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "build:gh-pages": "ng build --configuration production --base-href /Eliq-drinks-app-Bhanu/",
+    "deploy": "npm run build:gh-pages && node -e \"require('fs').copyFileSync('www/index.html','www/404.html')\" && gh-pages -d www"
   },
   "private": true,
   "dependencies": {
@@ -40,14 +42,15 @@
     "@angular/compiler-cli": "22.0.7",
     "@angular/language-service": "22.0.7",
     "@capacitor/cli": "8.4.2",
+    "@eslint/js": "^9.16.0",
     "@ionic/angular-toolkit": "^12.0.0",
     "@types/jasmine": "~5.1.0",
-    "@eslint/js": "^9.16.0",
     "angular-eslint": "^22.1.0",
     "eslint": "^9.16.0",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-jsdoc": "^48.2.1",
     "eslint-plugin-prefer-arrow": "1.2.2",
+    "gh-pages": "^6.3.0",
     "istanbul-lib-instrument": "^6.0.3",
     "jasmine-core": "~5.1.0",
     "jasmine-spec-reporter": "~5.0.0",
