@@ -6,6 +6,8 @@ import { DrinkDetail } from '../../models/drink.model';
 import { ConfigService } from '../../services/config.service';
 import { DrinksService } from '../../services/drinks.service';
 
+// Only these three are supported since TheCocktailDB only provides
+// strInstructionsES/strInstructionsFR as translations (besides English).
 type Language = 'en' | 'es' | 'fr';
 
 @Component({
@@ -68,6 +70,8 @@ export class DetailsPage implements OnInit {
     });
   }
 
+  // Cycles en -> es -> fr -> en; the instructions() computed signal reacts
+  // automatically since it reads language().
   toggleLanguage(): void {
     const order: Language[] = ['en', 'es', 'fr'];
     const next = order[(order.indexOf(this.language()) + 1) % order.length];
