@@ -1,0 +1,1 @@
+import {b as v$1}from'./main-LUIFXBM3.js';var s=()=>{let e;return {lock:()=>v$1(null,null,function*(){let o=e,t;return e=new Promise(n=>t=n),o!==void 0&&(yield o),t})}};export{s};
