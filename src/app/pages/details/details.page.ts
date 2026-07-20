@@ -1,7 +1,27 @@
 import { Location, CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit, computed, inject, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { IonicModule } from '@ionic/angular';
+import {
+  IonHeader,
+  IonToolbar,
+  IonButtons,
+  IonBackButton,
+  IonTitle,
+  IonContent,
+  IonSpinner,
+  IonText,
+  IonCard,
+  IonCardHeader,
+  IonCardTitle,
+  IonCardSubtitle,
+  IonCardContent,
+  IonImg,
+  IonButton,
+  IonList,
+  IonItem,
+  IonLabel,
+  IonNote,
+} from '@ionic/angular/standalone';
 import { DrinkDetail } from '../../models/drink.model';
 import { ConfigService } from '../../services/config.service';
 import { DrinksService } from '../../services/drinks.service';
@@ -13,7 +33,28 @@ type Language = 'en' | 'es' | 'fr';
 @Component({
   selector: 'app-details',
   standalone: true,
-  imports: [CommonModule, IonicModule],
+  imports: [
+    CommonModule,
+    IonHeader,
+    IonToolbar,
+    IonButtons,
+    IonBackButton,
+    IonTitle,
+    IonContent,
+    IonSpinner,
+    IonText,
+    IonCard,
+    IonCardHeader,
+    IonCardTitle,
+    IonCardSubtitle,
+    IonCardContent,
+    IonImg,
+    IonButton,
+    IonList,
+    IonItem,
+    IonLabel,
+    IonNote,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './details.page.html',
   styleUrls: ['./details.page.scss'],

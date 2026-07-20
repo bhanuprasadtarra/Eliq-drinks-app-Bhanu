@@ -1,7 +1,19 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
-import { IonicModule } from '@ionic/angular';
+import {
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonContent,
+  IonSpinner,
+  IonText,
+  IonList,
+  IonItem,
+  IonThumbnail,
+  IonImg,
+  IonLabel,
+} from '@ionic/angular/standalone';
 import { Drink } from '../../models/drink.model';
 import { ConfigService } from '../../services/config.service';
 import { DrinksService } from '../../services/drinks.service';
@@ -9,7 +21,20 @@ import { DrinksService } from '../../services/drinks.service';
 @Component({
   selector: 'app-list',
   standalone: true,
-  imports: [CommonModule, IonicModule],
+  imports: [
+    CommonModule,
+    IonHeader,
+    IonToolbar,
+    IonTitle,
+    IonContent,
+    IonSpinner,
+    IonText,
+    IonList,
+    IonItem,
+    IonThumbnail,
+    IonImg,
+    IonLabel,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './list.page.html',
   styleUrls: ['./list.page.scss'],
